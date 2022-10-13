@@ -1,0 +1,64 @@
+From 51438223512c37df1413bc0db3dd42846d0257c9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Bastien=20ROUCARI=C3=88S?= <roucaries.bastien@gmail.com>
+Date: Mon, 17 Apr 2017 18:05:11 +0200
+Subject: Replace minimalistic-assert by assert
+
+Forwarded: no
+---
+ lib/des/cbc.js    | 2 +-
+ lib/des/cipher.js | 2 +-
+ lib/des/des.js    | 2 +-
+ lib/des/ede.js    | 2 +-
+ package.json      | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+
+--- a/lib/des/cbc.js
++++ b/lib/des/cbc.js
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-var assert = require('minimalistic-assert');
++var assert = require('assert');
+ var inherits = require('inherits');
+ 
+ var proto = {};
+--- a/lib/des/cipher.js
++++ b/lib/des/cipher.js
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-var assert = require('minimalistic-assert');
++var assert = require('assert');
+ 
+ function Cipher(options) {
+   this.options = options;
+--- a/lib/des/des.js
++++ b/lib/des/des.js
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-var assert = require('minimalistic-assert');
++var assert = require('assert');
+ var inherits = require('inherits');
+ 
+ var utils = require('./utils');
+--- a/lib/des/ede.js
++++ b/lib/des/ede.js
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-var assert = require('minimalistic-assert');
++var assert = require('assert');
+ var inherits = require('inherits');
+ 
+ var Cipher = require('./cipher');
+--- a/package.json
++++ b/package.json
+@@ -29,6 +29,6 @@
+   },
+   "dependencies": {
+     "inherits": "^2.0.1",
+-    "minimalistic-assert": "^1.0.0"
++    "assert" : "^1.0.0"
+   }
+ }

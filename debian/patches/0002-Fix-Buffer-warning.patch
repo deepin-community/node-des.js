@@ -1,0 +1,128 @@
+From 246842a7fc1b87d05ed6c26df95fa3f82cc7792a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Bastien=20Roucari=C3=A8s?= <rouca@debian.org>
+Date: Tue, 1 Jan 2019 22:21:14 +0100
+Subject: Fix Buffer() warning
+
+Forwarded: https://github.com/indutny/des.js/issues/4
+---
+ test/cbc-test.js | 10 +++++-----
+ test/des-test.js | 18 +++++++++---------
+ test/ede-test.js | 10 +++++-----
+ 3 files changed, 19 insertions(+), 19 deletions(-)
+
+--- a/test/cbc-test.js
++++ b/test/cbc-test.js
+@@ -44,16 +44,16 @@
+ 
+     vectors.forEach(function(vec, i) {
+       it('should encrypt vector ' + i, function() {
+-        var key = new Buffer(vec.key, 'hex');
+-        var iv = new Buffer(vec.iv, 'hex');
+-        var input = new Buffer(vec.input, 'hex');
++        var key = new Buffer.from(vec.key, 'hex');
++        var iv = new Buffer.from(vec.iv, 'hex');
++        var input = new Buffer.from(vec.input, 'hex');
+ 
+         var enc = CBC.create({
+           type: 'encrypt',
+           key: key,
+           iv: iv
+         });
+-        var out = new Buffer(enc.update(input).concat(enc.final()));
++        var out = new Buffer.from(enc.update(input).concat(enc.final()));
+ 
+         var cipher = crypto.createCipheriv('des-cbc', key, iv);
+         var expected = Buffer.concat([ cipher.update(input), cipher.final() ]);
+@@ -65,7 +65,7 @@
+           key: key,
+           iv: iv
+         });
+-        assert.deepEqual(new Buffer(dec.update(out).concat(dec.final())),
++        assert.deepEqual(new Buffer.from(dec.update(out).concat(dec.final())),
+                          input);
+       });
+     });
+--- a/test/des-test.js
++++ b/test/des-test.js
+@@ -84,8 +84,8 @@
+ 
+     vectors.forEach(function(vec, i) {
+       it('should encrypt vector ' + i, function() {
+-        var key = new Buffer(vec.key, 'hex');
+-        var input = new Buffer(vec.input, 'hex');
++        var key = new Buffer.from(vec.key, 'hex');
++        var input = new Buffer.from(vec.input, 'hex');
+ 
+         var enc = des.DES.create({
+           type: 'encrypt',
+@@ -95,23 +95,23 @@
+           type: 'decrypt',
+           key: key
+         });
+-        var out = new Buffer(enc.update(input).concat(enc.final()));
++        var out = new Buffer.from(enc.update(input).concat(enc.final()));
+ 
+-        var cipher = crypto.createCipheriv('des-ecb', key, new Buffer(0));
++        var cipher = crypto.createCipheriv('des-ecb', key, new Buffer.from([]));
+         var expected = Buffer.concat([ cipher.update(input), cipher.final() ]);
+ 
+         assert.deepEqual(out, expected);
+ 
+-        assert.deepEqual(new Buffer(dec.update(out).concat(dec.final())),
++        assert.deepEqual(new Buffer.from(dec.update(out).concat(dec.final())),
+                          input);
+       });
+     });
+ 
+     it('should buffer during encryption/decryption', function() {
+-      var key = new Buffer('0102030405060708', 'hex');
+-      var chunk = new Buffer('01020304050607', 'hex');
++      var key = new Buffer.from('0102030405060708', 'hex');
++      var chunk = new Buffer.from('01020304050607', 'hex');
+       var count = 257;
+-      var expected = new Buffer(
++      var expected = new Buffer.from(
+           new Array(count + 1).join('01020304050607'), 'hex');
+ 
+       var enc = des.DES.create({
+@@ -132,7 +132,7 @@
+         out = out.concat(dec.update(cipher.slice(i * 7, (i + 1) * 7)));
+       out = out.concat(dec.final(cipher.slice(i * 7)));
+ 
+-      out = new Buffer(out);
++      out = new Buffer.from(out);
+       assert.deepEqual(out, expected);
+     });
+   });
+--- a/test/ede-test.js
++++ b/test/ede-test.js
+@@ -44,16 +44,16 @@
+ 
+     vectors.forEach(function(vec, i) {
+       it('should encrypt vector ' + i, function() {
+-        var key = new Buffer(vec.key, 'hex');
+-        var iv = new Buffer(vec.iv, 'hex');
+-        var input = new Buffer(vec.input, 'hex');
++        var key = new Buffer.from(vec.key, 'hex');
++        var iv = new Buffer.from(vec.iv, 'hex');
++        var input = new Buffer.from(vec.input, 'hex');
+ 
+         var enc = CBC.create({
+           type: 'encrypt',
+           key: key,
+           iv: iv
+         });
+-        var out = new Buffer(enc.update(input).concat(enc.final()));
++        var out = new Buffer.from(enc.update(input).concat(enc.final()));
+ 
+         var cipher = crypto.createCipheriv('des-ede3-cbc', key, iv);
+         var expected = Buffer.concat([ cipher.update(input), cipher.final() ]);
+@@ -65,7 +65,7 @@
+           key: key,
+           iv: iv
+         });
+-        assert.deepEqual(new Buffer(dec.update(out).concat(dec.final())),
++        assert.deepEqual(new Buffer.from(dec.update(out).concat(dec.final())),
+                          input);
+       });
+     });
