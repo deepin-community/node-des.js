@@ -9,7 +9,7 @@ Build-Depends: debhelper-compat (= 13)
  , node-assert <!nocheck>
  , node-inherits <!nocheck>
  , dh-sequence-nodejs
-Standards-Version: 4.6.0
+Standards-Version: 4.6.1
 Vcs-Browser: https://salsa.debian.org/js-team/node-des.js
 Vcs-Git: https://salsa.debian.org/js-team/node-des.js.git
 Homepage: https://github.com/indutny/des.js

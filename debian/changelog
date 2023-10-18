@@ -1,3 +1,12 @@
+node-des.js (1.0.1-3) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.6.1
+  * Fix filenamemangle
+  * Launch only test for protocols supported by OpenSSL 3 (Closes: #1011861)
+
+ -- Yadd <yadd@debian.org>  Wed, 01 Jun 2022 12:03:24 +0200
+
 node-des.js (1.0.1-2) unstable; urgency=medium
 
   * Team upload

@@ -1,1 +1,1 @@
-mocha -R spec test/
+mocha -R spec test/ede-test.js
